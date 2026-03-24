@@ -1,0 +1,65 @@
+[
+  {
+    "id": 389197,
+    "type": "api_group",
+    "path": "apis/edutrack_ai/api_group.xs",
+    "status": "unchanged",
+    "staged": false,
+    "sha256": "f7157838dc4095eefb4b2e88b541705a121392e36b696082b8bbf5df56c6d05f",
+    "original": "YXBpX2dyb3VwICJlZHV0cmFjay1haSIgewogIGNhbm9uaWNhbCA9ICItZ2NWdjF3VyIKfQ=="
+  },
+  {
+    "id": 3740173,
+    "type": "api_endpoint",
+    "path": "apis/edutrack_ai/3740173_users_GET.xs",
+    "status": "unchanged",
+    "staged": false,
+    "sha256": "6719a123979a400c81aea7f73ed613d8b9ed89ec09e7e04d1c6d015efd38285f",
+    "original": "Ly8gUXVlcnkgYWxsIHVzZXJzIHJlY29yZHMKcXVlcnkgdXNlcnMgdmVyYj1HRVQgewogIGFwaV9ncm91cCA9ICJlZHV0cmFjay1haSIKCiAgaW5wdXQgewogIH0KCiAgc3RhY2sgewogICAgZGIucXVlcnkgdXNlcnMgewogICAgICByZXR1cm4gPSB7dHlwZTogImxpc3QifQogICAgfSBhcyAkdXNlcnMKICB9CgogIHJlc3BvbnNlID0gJHVzZXJzCn0="
+  },
+  {
+    "id": 3740174,
+    "type": "api_endpoint",
+    "path": "apis/edutrack_ai/3740174_users_POST.xs",
+    "status": "unchanged",
+    "staged": false,
+    "sha256": "1d3e5a8dcb7a0981904587453fc0e3ad9b59dad1ecf0a99dba26f6d3493f0a73",
+    "original": "Ly8gQWRkIHVzZXJzIHJlY29yZApxdWVyeSB1c2VycyB2ZXJiPVBPU1QgewogIGFwaV9ncm91cCA9ICJlZHV0cmFjay1haSIKCiAgaW5wdXQgewogICAgZGJsaW5rIHsKICAgICAgdGFibGUgPSAidXNlcnMiCiAgICB9CiAgfQoKICBzdGFjayB7CiAgICBkYi5hZGQgdXNlcnMgewogICAgICBkYXRhID0ge2NyZWF0ZWRfYXQ6ICJub3cifQogICAgfSBhcyAkdXNlcnMKICB9CgogIHJlc3BvbnNlID0gJHVzZXJzCn0="
+  },
+  {
+    "id": 3740171,
+    "type": "api_endpoint",
+    "path": "apis/edutrack_ai/3740171_users_users_id_DELETE.xs",
+    "status": "unchanged",
+    "staged": false,
+    "sha256": "2b9af8ff0ae30c11da14aee3eba13e51861fc8591c34eb173e710b66e8a12f33",
+    "original": "Ly8gRGVsZXRlIHVzZXJzIHJlY29yZC4KcXVlcnkgInVzZXJzL3t1c2Vyc19pZH0iIHZlcmI9REVMRVRFIHsKICBhcGlfZ3JvdXAgPSAiZWR1dHJhY2stYWkiCgogIGlucHV0IHsKICAgIGludCB1c2Vyc19pZD8gZmlsdGVycz1taW46MQogIH0KCiAgc3RhY2sgewogICAgZGIuZGVsIHVzZXJzIHsKICAgICAgZmllbGRfbmFtZSA9ICJpZCIKICAgICAgZmllbGRfdmFsdWUgPSAkaW5wdXQudXNlcnNfaWQKICAgIH0KICB9CgogIHJlc3BvbnNlID0gbnVsbAp9"
+  },
+  {
+    "id": 3740172,
+    "type": "api_endpoint",
+    "path": "apis/edutrack_ai/3740172_users_users_id_GET.xs",
+    "status": "unchanged",
+    "staged": false,
+    "sha256": "869232ac040ec73e61c95d78b2cab0ee5540d5167e7f65132397e82a1c05f4f3",
+    "original": "Ly8gR2V0IHVzZXJzIHJlY29yZApxdWVyeSAidXNlcnMve3VzZXJzX2lkfSIgdmVyYj1HRVQgewogIGFwaV9ncm91cCA9ICJlZHV0cmFjay1haSIKCiAgaW5wdXQgewogICAgaW50IHVzZXJzX2lkPyBmaWx0ZXJzPW1pbjoxCiAgfQoKICBzdGFjayB7CiAgICBkYi5nZXQgdXNlcnMgewogICAgICBmaWVsZF9uYW1lID0gImlkIgogICAgICBmaWVsZF92YWx1ZSA9ICRpbnB1dC51c2Vyc19pZAogICAgfSBhcyAkdXNlcnMKICAKICAgIHByZWNvbmRpdGlvbiAoJHVzZXJzICE9IG51bGwpIHsKICAgICAgZXJyb3JfdHlwZSA9ICJub3Rmb3VuZCIKICAgICAgZXJyb3IgPSAiTm90IEZvdW5kLiIKICAgIH0KICB9CgogIHJlc3BvbnNlID0gJHVzZXJzCn0="
+  },
+  {
+    "id": 3740175,
+    "type": "api_endpoint",
+    "path": "apis/edutrack_ai/3740175_users_users_id_PATCH.xs",
+    "status": "unchanged",
+    "staged": false,
+    "sha256": "605bfd6d960f235c445e7c02d1ff43cb3906d3cfeb8402872ae049321f270402",
+    "original": "Ly8gRWRpdCB1c2VycyByZWNvcmQKcXVlcnkgInVzZXJzL3t1c2Vyc19pZH0iIHZlcmI9UEFUQ0ggewogIGFwaV9ncm91cCA9ICJlZHV0cmFjay1haSIKCiAgaW5wdXQgewogICAgaW50IHVzZXJzX2lkPyBmaWx0ZXJzPW1pbjoxCiAgICBkYmxpbmsgewogICAgICB0YWJsZSA9ICJ1c2VycyIKICAgIH0KICB9CgogIHN0YWNrIHsKICAgIHV0aWwuZ2V0X3Jhd19pbnB1dCB7CiAgICAgIGVuY29kaW5nID0gImpzb24iCiAgICAgIGV4Y2x1ZGVfbWlkZGxld2FyZSA9IGZhbHNlCiAgICB9IGFzICRyYXdfaW5wdXQKICAKICAgIGRiLnBhdGNoIHVzZXJzIHsKICAgICAgZmllbGRfbmFtZSA9ICJpZCIKICAgICAgZmllbGRfdmFsdWUgPSAkaW5wdXQudXNlcnNfaWQKICAgICAgZGF0YSA9IGAkaW5wdXR8cGljazooJHJhd19pbnB1dHxrZXlzKWB8ZmlsdGVyX251bGx8ZmlsdGVyX2VtcHR5X3RleHQKICAgIH0gYXMgJHVzZXJzCiAgfQoKICByZXNwb25zZSA9ICR1c2Vycwp9"
+  },
+  {
+    "id": 791257,
+    "type": "table",
+    "path": "tables/791257_users.xs",
+    "status": "unchanged",
+    "staged": false,
+    "sha256": "814cb059a46fbb79f46e2908b86d844d1851ad5804862f76b71651cb385eac37",
+    "original": "Ly8gTWV1IHByaW1laXJvIGNvbWVudMOhcmlvIHZpYSBWUyBDb2RlCnRhYmxlIHVzZXJzIHsKICBhdXRoID0gZmFsc2UKCiAgc2NoZW1hIHsKICAgIGludCBpZAogICAgdGltZXN0YW1wIGNyZWF0ZWRfYXQ/PW5vdyB7CiAgICAgIHZpc2liaWxpdHkgPSAicHJpdmF0ZSIKICAgIH0KICB9CgogIGluZGV4ID0gWwogICAge3R5cGU6ICJwcmltYXJ5IiwgZmllbGQ6IFt7bmFtZTogImlkIn1dfQogICAge3R5cGU6ICJidHJlZSIsIGZpZWxkOiBbe25hbWU6ICJjcmVhdGVkX2F0Iiwgb3A6ICJkZXNjIn1dfQogIF0KfQ=="
+  }
+]
