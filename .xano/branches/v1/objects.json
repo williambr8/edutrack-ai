@@ -61,5 +61,57 @@
     "staged": false,
     "sha256": "814cb059a46fbb79f46e2908b86d844d1851ad5804862f76b71651cb385eac37",
     "original": "Ly8gTWV1IHByaW1laXJvIGNvbWVudMOhcmlvIHZpYSBWUyBDb2RlCnRhYmxlIHVzZXJzIHsKICBhdXRoID0gZmFsc2UKCiAgc2NoZW1hIHsKICAgIGludCBpZAogICAgdGltZXN0YW1wIGNyZWF0ZWRfYXQ/PW5vdyB7CiAgICAgIHZpc2liaWxpdHkgPSAicHJpdmF0ZSIKICAgIH0KICB9CgogIGluZGV4ID0gWwogICAge3R5cGU6ICJwcmltYXJ5IiwgZmllbGQ6IFt7bmFtZTogImlkIn1dfQogICAge3R5cGU6ICJidHJlZSIsIGZpZWxkOiBbe25hbWU6ICJjcmVhdGVkX2F0Iiwgb3A6ICJkZXNjIn1dfQogIF0KfQ=="
+  },
+  {
+    "id": 0,
+    "path": "tables/subjects.xs",
+    "status": "new",
+    "type": "table",
+    "staged": true
+  },
+  {
+    "id": 3854249,
+    "type": "api_endpoint",
+    "path": "apis/edutrack_ai/3854249_subjects_GET.xs",
+    "status": "unchanged",
+    "staged": false,
+    "sha256": "91c579949b3c28d3c0ce601dcf70d09414502ce00d0ce737f77d9bd3b0e6ed50",
+    "original": "Ly8gUXVlcnkgYWxsIFN1YmplY3RzIHJlY29yZHMKcXVlcnkgc3ViamVjdHMgdmVyYj1HRVQgewogIGFwaV9ncm91cCA9ICJlZHV0cmFjay1haSIKCiAgaW5wdXQgewogIH0KCiAgc3RhY2sgewogICAgZGIucXVlcnkgU3ViamVjdHMgewogICAgICByZXR1cm4gPSB7dHlwZTogImxpc3QifQogICAgfSBhcyAkc3ViamVjdHMKICB9CgogIHJlc3BvbnNlID0gJHN1YmplY3RzCn0="
+  },
+  {
+    "id": 3854250,
+    "type": "api_endpoint",
+    "path": "apis/edutrack_ai/3854250_subjects_POST.xs",
+    "status": "unchanged",
+    "staged": false,
+    "sha256": "39de9cf8acc4e2addba10e14cce6509ce1a58a9455593b31012ec34b5b424bba",
+    "original": "Ly8gQWRkIFN1YmplY3RzIHJlY29yZApxdWVyeSBzdWJqZWN0cyB2ZXJiPVBPU1QgewogIGFwaV9ncm91cCA9ICJlZHV0cmFjay1haSIKCiAgaW5wdXQgewogICAgZGJsaW5rIHsKICAgICAgdGFibGUgPSAiU3ViamVjdHMiCiAgICB9CiAgfQoKICBzdGFjayB7CiAgICBkYi5hZGQgU3ViamVjdHMgewogICAgICBkYXRhID0ge2NyZWF0ZWRfYXQ6ICJub3cifQogICAgfSBhcyAkc3ViamVjdHMKICB9CgogIHJlc3BvbnNlID0gJHN1YmplY3RzCn0="
+  },
+  {
+    "id": 3854247,
+    "type": "api_endpoint",
+    "path": "apis/edutrack_ai/3854247_subjects_subjects_id_DELETE.xs",
+    "status": "unchanged",
+    "staged": false,
+    "sha256": "6753190b10c56b4ae7a7489489ee9ff3e7ead150161b47fd1662b1ffedd4f93a",
+    "original": "Ly8gRGVsZXRlIFN1YmplY3RzIHJlY29yZC4KcXVlcnkgInN1YmplY3RzL3tzdWJqZWN0c19pZH0iIHZlcmI9REVMRVRFIHsKICBhcGlfZ3JvdXAgPSAiZWR1dHJhY2stYWkiCgogIGlucHV0IHsKICAgIGludCBzdWJqZWN0c19pZD8gZmlsdGVycz1taW46MQogIH0KCiAgc3RhY2sgewogICAgZGIuZGVsIFN1YmplY3RzIHsKICAgICAgZmllbGRfbmFtZSA9ICJpZCIKICAgICAgZmllbGRfdmFsdWUgPSAkaW5wdXQuc3ViamVjdHNfaWQKICAgIH0KICB9CgogIHJlc3BvbnNlID0gbnVsbAp9"
+  },
+  {
+    "id": 3854248,
+    "type": "api_endpoint",
+    "path": "apis/edutrack_ai/3854248_subjects_subjects_id_GET.xs",
+    "status": "unchanged",
+    "staged": false,
+    "sha256": "6d62debe774291be61ae04d631f2c263141ea5bd14719a68cff984cfc256ac77",
+    "original": "Ly8gR2V0IFN1YmplY3RzIHJlY29yZApxdWVyeSAic3ViamVjdHMve3N1YmplY3RzX2lkfSIgdmVyYj1HRVQgewogIGFwaV9ncm91cCA9ICJlZHV0cmFjay1haSIKCiAgaW5wdXQgewogICAgaW50IHN1YmplY3RzX2lkPyBmaWx0ZXJzPW1pbjoxCiAgfQoKICBzdGFjayB7CiAgICBkYi5nZXQgU3ViamVjdHMgewogICAgICBmaWVsZF9uYW1lID0gImlkIgogICAgICBmaWVsZF92YWx1ZSA9ICRpbnB1dC5zdWJqZWN0c19pZAogICAgfSBhcyAkc3ViamVjdHMKICAKICAgIHByZWNvbmRpdGlvbiAoJHN1YmplY3RzICE9IG51bGwpIHsKICAgICAgZXJyb3JfdHlwZSA9ICJub3Rmb3VuZCIKICAgICAgZXJyb3IgPSAiTm90IEZvdW5kLiIKICAgIH0KICB9CgogIHJlc3BvbnNlID0gJHN1YmplY3RzCn0="
+  },
+  {
+    "id": 3854251,
+    "type": "api_endpoint",
+    "path": "apis/edutrack_ai/3854251_subjects_subjects_id_PATCH.xs",
+    "status": "unchanged",
+    "staged": false,
+    "sha256": "13af16838b1cf4749a463733908fdfb48fb1b128a3b1e2f77b43b1d5221d74dc",
+    "original": "Ly8gRWRpdCBTdWJqZWN0cyByZWNvcmQKcXVlcnkgInN1YmplY3RzL3tzdWJqZWN0c19pZH0iIHZlcmI9UEFUQ0ggewogIGFwaV9ncm91cCA9ICJlZHV0cmFjay1haSIKCiAgaW5wdXQgewogICAgaW50IHN1YmplY3RzX2lkPyBmaWx0ZXJzPW1pbjoxCiAgICBkYmxpbmsgewogICAgICB0YWJsZSA9ICJTdWJqZWN0cyIKICAgIH0KICB9CgogIHN0YWNrIHsKICAgIHV0aWwuZ2V0X3Jhd19pbnB1dCB7CiAgICAgIGVuY29kaW5nID0gImpzb24iCiAgICAgIGV4Y2x1ZGVfbWlkZGxld2FyZSA9IGZhbHNlCiAgICB9IGFzICRyYXdfaW5wdXQKICAKICAgIGRiLnBhdGNoIFN1YmplY3RzIHsKICAgICAgZmllbGRfbmFtZSA9ICJpZCIKICAgICAgZmllbGRfdmFsdWUgPSAkaW5wdXQuc3ViamVjdHNfaWQKICAgICAgZGF0YSA9IGAkaW5wdXR8cGljazooJHJhd19pbnB1dHxrZXlzKWB8ZmlsdGVyX251bGx8ZmlsdGVyX2VtcHR5X3RleHQKICAgIH0gYXMgJHN1YmplY3RzCiAgfQoKICByZXNwb25zZSA9ICRzdWJqZWN0cwp9"
   }
 ]

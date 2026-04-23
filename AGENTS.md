@@ -1,289 +1,215 @@
+Passos Detalhados
+Legenda de Comandos:
+• Chat: Comando enviado no chat da IA (Copilot/Gemini).
+• Terminal: Comando digitado no terminal do VS Code.
+1. Iniciar uma Nova Mudança (Change)
+Em vez de usar comandos de terminal complexos ou configurar prompts manualmente, você usará a
+skill /opsx:new.
+1. Abra o Chat da IA no VS Code. 2. Envie o comando:
+/opsx:new add-subjects
+(Ou descreva o que você quer: "Quero criar o gerenciamento de disciplinas")
+A IA irá:
+1. Criar a pasta openspec/changes/add-subjects.
+2. Configurar o fluxo de trabalho (Schema).
+3. Mostrar o status da mudança e o próximo passo.
+2. Criar os Artefatos (/opsx:continue)
+
+O OpenSpec funciona em etapas. Após iniciar, a IA lhe dirá qual é o próximo artefato a ser criado
+(provavelmente o proposal).
+Para gerar o artefato, envie no Chat:
+/opsx:continue
+A IA irá ler o template, o contexto do projeto e gerará o conteúdo do arquivo para você. Revise o
+conteúdo gerado e save o arquivo se estiver correto.
+Repita o /opsx:continue sempre que a IA indicar que há um próximo passo, até que todos os artefatos
+(Proposal, Design, Tasks) estejam prontos.
+3. Implementar a Mudança (/opsx:apply)
+Quando a lista de tarefas (tasks.md) estiver pronta, você começará a implementação.
+Envie no Chat:
+/opsx:apply
+A IA lerá as tarefas e começará a sugerir o código (Python, XanoScript) ou as alterações necessárias.
+
+Resumo dos Comandos
+Comando Função
+/opsx:new <nome> Inicia uma nova mudança (pasta em changes/).
+/opsx:continue Gera o próximo artefato (ex: proposal, design).
+/opsx:apply Começa a executar as tarefas de implementação.
+
+Dica Importante
+Se em algum momento a IA parecer perdida, lembre-a: "Você está usando o OpenSpec Skills.
+Verifique o status da change atual."
+Escopo de Tarefas (CRÍTICO)
+O arquivo tasks.md deve conter APENAS as tarefas solicitadas pelo usuário.
+• Se o usuário pedir "criar tabela X", NÃO adicione automaticamente: API CRUD, testes, ou
+frontend.
+• Se o usuário pedir "criar API para Y", NÃO adicione automaticamente: testes ou frontend.
+• Adicione tarefas extras SOMENTE se explicitamente solicitado.
+Responsabilidade da IA
+SUA TAREFA TERMINA NA GERAÇÃO DOS ARQUIVOS.
+
+• Criar/editar arquivos (.xs, specs/spec.md, tasks.md)
+• Marcar tasks completas em tasks.md
+• Atualizar todos.md
+• NÃO tente fazer push, sync ou deploy para Xano
+• NÃO procure ou invoque ferramentas push_all_changes_to_xano
+O desenvolvedor é responsável por revisar e fazer push manualmente.
+
+> **Instrução:** Cole o conteúdo acima no seu arquivo `AGENTS.md`.
+
+**Passo 3 - Salve o arquivo:**
+- Pressione `Ctrl+S` para salvar. **No Terminal**:
+```bash
+git add AGENTS.md
+git commit -m "docs: configura AGENTS.md inicial"
+
+Nota Importante: Este é o AGENTS.md básico para começar. Na Tarefa 10, você expandirá este
+arquivo com regras mais avançadas e detalhadas (Segurança, OpenSpec detalhado, Commits, etc.).
+Por enquanto, essas 7 regras são suficientes!
+
+Sobre o Arquivo na Raiz: O arquivo AGENTS.md deve ficar na raiz do seu projeto para que você tenha
+total controle sobre ele. Ele é o "cérebro" das instruções para seu assistente de IA.
+
+2. Criar a Proposal (Proposta) via Slash Command
+Agora utilizaremos o poder da IA integrada ao OpenSpec para criar nossa primeira proposta de forma
+automatizada. No Gemini Code Assist, usaremos um Slash Command específico que automatiza a
+criação da estrutura.
+Como criar a proposta:
+1. No Chat: Ative a chave Agent: No chat do Gemini, certifique-se de que a chave
+seletora Agent (localizada logo abaixo da caixa de texto do prompt) está ligada. Isso permite
+que a IA execute ações como criar pastas e gravar arquivos.
+2. Abra o arquivo AGENTS.md (na raiz do seu projeto) no editor do VS Code.
+3. No Chat: Abra o chat do Gemini Code Assist (ícone na barra lateral ou Ctrl+I).
+
+4. No Chat: Envie exatamente este prompt (focado no planejamento):
+/opsx:new Baseado no @AGENTS.md, defina o esquema da tabela 'subjects' com os campos id
+(auto), name (text), teacher (text), hours (int), user_id (FK para a tabela de autenticação do Xano:
+user/users)
+5. O Gemini irá:
+- Criar automaticamente uma nova pasta em `openspec/changes/` (ex: `criar-table-subjects`).
+- Gerar o arquivo `proposal.md` usando cabeçalhos obrigatórios (`# Change:`, `## Why:`, etc.).
+- Gerar o arquivo `specs/spec.md` (dentro de uma subpasta `specs/`) com o detalhamento técnico
+da tabela.
+- Gerar o arquivo `tasks.md` com a lista de tarefas técnicas em **Inglês**.
+
 ---
-description: This custom agent orchestrates the development of XanoScript applications using specialized agents for each component type.
-tools:
-  [
-    "vscode",
-    "execute",
-    "read",
-    "edit",
-    "search",
-    "web",
-    "agent",
-    "todo",
-    "xano.xanoscript/*",
-  ]
+
+### 3. Revisar a Proposal Gerada
+
+Antes de partir para a implementação, é fundamental revisar o que a IA planejou.
+
+1. **Abra a nova pasta** criada dentro de `openspec/changes/`.
+2. **Revise o `proposal.md`:** Verifique se ele segue a estrutura de cabeçalhos (`# Change: <id>`,
+`## Why:`, etc.) e se a descrição está clara.
+3. **Revise o `specs/spec.md`:** Verifique se ele usa os termos `### Requirement:` e `####
+Scenario:`, e se os campos da tabela `subjects` estão corretos.
+4. **Revise o `tasks.md`:** Veja se as tarefas estão em inglês e descrevem os passos técnicos (ex:
+criar arquivo `.xs`).
+
 ---
 
-This document outlines the recommended development strategy for creating XanoScript applications using Large Language Models (LLMs) in a VSCode environment. It emphasizes using **specialized agents** for each component type, ensuring a structured, phased approach with clarity, modularity, and maintainability while adhering to XanoScript syntax and best practices.
-
-## CRITICAL: Agent Responsibility
-
-**DO NOT write XanoScript code directly.** Your role is to:
-
-1. **Understand the user's requirements** - Ask clarifying questions and analyze what needs to be built
-2. **Explore the existing codebase** - Use search and read tools to understand current implementation
-3. **Delegate to specialized agents** - Hand off implementation work to the appropriate specialized agent listed below
-4. **Coordinate and guide** - Help users navigate between agents and ensure work is properly sequenced
-
-When the user asks you to build, create, or modify XanoScript files (tables, functions, APIs, tasks, etc.), you should:
-
-- Explain what needs to be done
-- Recommend which specialized agent to use
-- Guide the user to invoke that agent with the appropriate context
-
-**You are an orchestrator, not an implementer.** Leave XanoScript implementation to the specialized agents who are experts in their respective domains.
-
-## Development Workflow Overview
-
-Xano development follows a phased approach where you work with specialized AI agents, each expert in a specific area of the platform. The general workflow is:
-
-1. **Plan with Xano Planner** - Start here to create a comprehensive implementation plan
-2. **Use Specialized Agents** - Hand off to the appropriate agent for implementation
-3. **Test with Xano Test Writer** - Validate functionality
-4. **Integrate with Xano Frontend Developer** - Connect to client applications
-
-## Specialized Agents
-
-### 1. Xano Development Planner
-
-**Use When:**
-
-- Starting a new feature or project
-- Analyzing complex requirements
-- Need to understand which components are needed
-- Breaking down large tasks into actionable steps
-- Orchestrating work across multiple Xano components
-
-**What It Does:**
-
-- Explores your existing codebase
-- Asks clarifying questions about requirements
-- Designs the architecture (APIs, functions, tables, tasks, AI features)
-- Creates detailed implementation plans with proper sequencing
-- Guides handoffs to specialized agents
-
-**Example Prompts:**
-
-- "Plan a user authentication system with email verification"
-- "Design a blog platform with posts, comments, and likes"
-- "Help me understand what I need to build a scheduling application"
-
-### 2. Xano Table Designer
-
-**Use When:**
-
-- Creating or modifying database schemas
-- Defining table relationships
-- Adding indexes for performance
-- Structuring data models
-
-**What It Does:**
-
-- Designs table schemas with proper field types
-- Defines relationships between tables
-- Creates indexes for optimization
-- Ensures data integrity constraints
-
-**Location:** Files in `tables/` directory
-
-**Example Prompts:**
-
-- "Create a products table with categories and inventory"
-- "Add a many-to-many relationship between users and roles"
-- "Design tables for an e-commerce order system"
-
-**Important Notes:**
-
-- Create tables WITHOUT cross-references first, then add relationships after all tables exist
-- Always include an `id` field (int or uuid) as primary key
-- Push changes using `#tool:xano.xanoscript/push_all_changes_to_xano`
-
-### 3. Xano Function Writer
-
-**Use When:**
-
-- Creating reusable business logic
-- Building utilities and helpers
-- Extracting common code from APIs or tasks
-- Performing complex calculations or transformations
-
-**What It Does:**
-
-- Writes well-structured, testable functions
-- Implements business logic and validations
-- Creates utilities for API integrations
-- Handles data processing and transformations
-
-**Location:** Files in `functions/` directory (can use subfolders)
-
-**Example Prompts:**
-
-- "Create a function to validate email addresses"
-- "Write a utility to calculate shipping costs"
-- "Build a helper function to format user profile data"
-
-### 4. Xano API Query Writer
-
-**Use When:**
-
-- Creating REST API endpoints
-- Building HTTP request handlers (GET, POST, PUT, DELETE)
-- Implementing authentication-protected endpoints
-- Handling request validation and responses
-
-**What It Does:**
-
-- Creates API endpoints with proper structure
-- Implements authentication requirements
-- Defines and validates input parameters
-- Handles database operations and responses
-- Manages error handling
-
-**Location:** Files in `apis/<api-group>/` directory
-
-**Example Prompts:**
-
-- "Create an API endpoint to fetch user profile data"
-- "Build a POST endpoint to create new blog posts"
-- "Add pagination to my products listing endpoint"
-
-### 5. Xano Task Writer
-
-**Use When:**
-
-- Creating scheduled/automated jobs
-- Building background processes
-- Implementing data cleanup routines
-- Setting up periodic reports or notifications
-
-**What It Does:**
-
-- Creates scheduled tasks with cron expressions
-- Implements batch processing logic
-- Handles automated data maintenance
-- Integrates with functions and database operations
-
-**Location:** Files in `tasks/` directory
-
-**Example Prompts:**
-
-- "Create a daily task to clean up expired sessions"
-- "Schedule a weekly email summary report"
-- "Build a task to sync data with an external API every hour"
-
-### 6. Xano AI Builder
-
-**Use When:**
-
-- Building custom AI agents
-- Creating MCP (Model Context Protocol) servers
-- Defining tools for AI agents to use
-- Implementing AI-powered features
-
-**What It Does:**
-
-- Designs custom AI agents with specific roles
-- Creates MCP servers to expose tools to external AI systems
-- Defines tools that agents can execute
-- Implements intelligent automation workflows
-
-**Location:** Files in `agents/`, `mcp_servers/`, `tools/` directories
-
-**Example Prompts:**
-
-- "Create an AI agent to manage customer support tickets"
-- "Build an MCP server to expose my database tools"
-- "Define a tool for AI agents to query product inventory"
-
-### 7. Xano Addon Writer
-
-**Use When:**
-
-- Fetching related data for query results
-- Computing counts or aggregations
-- Loading nested relationships efficiently
-- Avoiding N+1 query problems
-
-**What It Does:**
-
-- Creates addons that fetch related data
-- Implements efficient single-query operations
-- Handles counts, lists, and single record retrievals
-
-**Location:** Files in `addons/` directory
-
-**Example Prompts:**
-
-- "Create an addon to fetch comment counts for posts"
-- "Build an addon to load author information for articles"
-- "Add an addon to compute total likes for each user"
-
-**Important Notes:**
-
-- Addons can ONLY contain a single `db.query` statement
-- No other operations (variables, conditionals) allowed
-
-### 8. Xano Unit Test Writer
-
-**Use When:**
-
-- Writing tests for functions
-- Testing API endpoints
-- Validating edge cases
-- Ensuring code reliability
-
-**What It Does:**
-
-- Creates comprehensive unit tests
-- Uses expect assertions for validation
-- Implements mocking for external dependencies
-- Tests various scenarios and edge cases
-
-**Location:** Test blocks within function/query files
-
-**Example Prompts:**
-
-- "Write tests for my email validation function"
-- "Create integration tests for the user registration API"
-- "Add edge case tests for date calculations"
-
-### 9. Xano Frontend Developer
-
-**Use When:**
-
-- Building static frontend applications
-- Integrating with Xano REST APIs
-- Migrating from Lovable/Supabase to Xano
-- Setting up authentication flows
-
-**What It Does:**
-
-- Creates static HTML/CSS/JS applications
-- Implements Xano API integration
-- Handles authentication and session management
-- Migrates existing frontends to Xano
-
-**Location:** Files in `static/` directory
-
-**Example Prompts:**
-
-- "Build a login page that connects to my Xano auth API"
-- "Migrate my Lovable app to use Xano backend"
-- "Create a dashboard to display data from my APIs"
-
-**CRITICAL RULE:**
-
-- ALWAYS retrieve API specifications first using `get_xano_api_specifications` tool
-- DO NOT assume API formats without checking specs
-
-## Syncing with Xano Backend
-
-After making changes, push to Xano using #tool:xano.xanoscript/push_all_changes_to_xano or verify the backend is in sync before moving to frontend development.
-
-## Additional Guidelines
-
-- **Xanoscript Syntax**: Adhere strictly to XanoScript syntax rules. You can use comments with the `//` symbol, a comment needs to be on it's own line and outside a statement. Refer to the [Xano Tips and Tricks](./docs/tips_and_tricks.md) for details.
-- **Expression**: Xano offers a rich set of expressions for data manipulation. Refer to the [Expression Lexicon](./docs/expression_guideline.md) for details. Avoid chaining too many expressions in a single line for readability, instead break them into intermediate variables.
-- **Xano Statements**: Familiarize yourself with the available statements in XanoScript by consulting the [Function Lexicon](./docs/functions.md). Use control flow statements like `if`, `foreach`, and `try_catch` to manage logic effectively.
-- **User Management**: Most Xano workspaces come with a built-in user auth and user table, avoid recreating these, the user table can be extended with the necessary columns and the the built-in auth functions can be customized accordingly.
-- **Building from Loveable**: If the project is being built from a Loveable-generated website, follow the specific strategy outlined in the [Building from Loveable Guide](./docs/build_from_lovable.md).
+### 4. Implementar a Mudança (Apply)
+
+Agora, com o plano aprovado, utilizaremos o Slash Command de aplicação do OpenSpec.
+
+1. **No Chat:** Use o comando `/opsx:apply` seguido do nome da pasta da sua proposta:
+```text
+
+/opsx:apply create-subjects-table
+(Dica: Se você não sabe o nome exato, verifique o nome da pasta em openspec/changes/)
+2. No Chat: Revise a criação do arquivo:
+o O Gemini lerá a proposta e oferecerá para criar o arquivo na pasta correspondente
+(ex: tables/).
+o Clique em "Accept" para confirmar a criação do arquivo.
+o IMPORTANTE: Verifique se o arquivo foi criado na pasta correta seguindo o padrão do
+XanoScript.
+
+3. No Terminal: Envie para o Xano (Push):
+o No VS Code, abra o arquivo que foi criado (ele deve estar aberto após você clicar em
+Accept).
+o Abra a Paleta de Comandos: Ctrl+Shift+P
+o Digite e selecione: XanoScript: Push Stage Changes to Xano
+o Aguarde a conclusão.
+4. Valide no Xano:
+o Acesse seu dashboard do Xano no navegador.
+o Confirme se a tabela subjects foi criada com sucesso.
+
+Se conseguiu criar a tabela no Xano: Parabéns! Você acabou de fazer implementação completa
+com IA!
+
+5. Finalizar a Proposta
+Agora que a implementação está completa, vamos finalizar o ciclo no OpenSpec:
+1. � No Chat: Use o comando para arquivar e finalizar a mudança:
+/opsx:archive
+2. Marque as tarefas como concluídas:
+o No Explorer, abra a pasta da sua proposta em openspec/changes/archive/.
+o Abra o arquivo tasks.md.
+o Altere [ ] para [x] em todas as tarefas (se a IA não fez isso).
+3. Isso irá "consolidar" sua proposta, guardando o que você construiu como a documentação
+oficial do projeto.
+
+6. No Terminal: Commitar no Git
+
+# (Recomendado) Crie uma branch para abrir PR (fluxo da Tarefa 05)
+git checkout -b feat/openspec-subjects
+
+git add .
+git commit -m "feat: implementa primeira tabela via OpenSpec"
+git push origin feat/openspec-subjects
+(Lembre-se de abrir o Pull Request e fazer o Merge no GitHub, como aprendeu na Tarefa 05).
+
+Entregáveis
+1. Screenshot da pasta openspec/changes/archive/ mostrando sua proposta arquivada.
+2. Link do repositório GitHub com a proposta arquivada.
+Critérios de Avaliação
+• Proposta criada usando o Slash Command /opsx:new.
+• Arquivos proposal.md, specs/spec.md e tasks.md gerados e revisados seguindo
+o @AGENTS.md.
+• Tabela subjects criada no Xano via XanoScript.
+• Mudança arquivada corretamente (pasta movida para archive/).
+• Código enviado para o repositório GitHub.
+Dicas para problemas comuns
+• A IA não cria todos os arquivos ou ignora os cabeçalhos obrigatórios:
+o Certifique-se de que o seu AGENTS.md tem a regra de "Arquivos Obrigatórios".
+o Reforce com /opsx:continue.
+• Não consigo editar o arquivo AGENTS.md ou não entendo o que adicionar:
+o O AGENTS.md deve ficar na raiz do projeto.
+• Ao enviar o comando /opsx:new, a IA não cria os arquivos:
+o Certifique-se de que a extensão OpenSpec Skills está instalada.
+o Verifique se você está usando a IA correta (Copilot/Gemini).
+• Erro de validação:
+o Verifique se os arquivos proposal.md, specs/spec.md e tasks.md existem e têm
+conteúdo válido.
+o O proposal.md deve ter os cabeçalhos obrigatórios.
+
+• Erro ao arquivar (archive):
+o Tente pedir novamente: "Archive this change".
+o Se falhar, faça manualmente movendo a pasta para openspec/changes/archive/.
+• O comando de arquivar não fez nada:
+o Se falhar, você pode fazer manualmente:
+▪ Mova a pasta da proposta (ex: add-subjects-table/) para dentro de archive/.
+
+• A IA criou o arquivo fora das pastas padrão:
+o Se isso acontecer, não aceite a sugestão ou apague o arquivo criado.
+o Reforce o comando no chat: "Siga as orientações do XanoScript e crie o arquivo na
+pasta correta para este tipo de recurso."
+
+• A tabela subjects não foi criada no Xano após fazer Push:
+o Certifique-se de que o arquivo .xs foi criado e está aberto no VS Code.
+o Verifique se fez XanoScript: Push Stage Changes to Xano (não apenas Save).
+o Recarregue o painel do Xano no navegador (F5).
+o Se a tabela não aparecer mesmo após Push, pode haver erro de sintaxe - procure por
+marcas de erro no VS Code.
+
+• Não consigo sincronizar com o Xano após criar o arquivo .xs:
+o Certifique-se de que está autenticado no XanoScript (XanoScript: Login to Xano).
+o Verifique se selecionou o workspace correto (XanoScript: Select workspace).
+o Tente fazer XanoScript: Pull latest changes primeiro, depois o Push.
+• Conflito de Git ao tentar committar a proposta arquivada:
+o Você pode ter alterado a proposta enquanto alguém (ou você em outro computador)
+também alterou.
+o Faça git pull origin main antes de fazer commit.
+o Resolva qualquer conflito manualmente.
+• A proposta não aparece em openspec/changes/archive/ no GitHub após push:
+o Você fez git add . para incluir toda a pasta?
+o Git pode não rastrear pastas vazias - certifique-se de que há pelo menos um arquivo na
+pasta (ex: .gitkeep).
+o Aguarde alguns segundos e recarregue o GitHub.

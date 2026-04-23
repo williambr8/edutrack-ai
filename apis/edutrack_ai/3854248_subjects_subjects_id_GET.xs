@@ -1,0 +1,22 @@
+// Get Subjects record
+query "subjects/{subjects_id}" verb=GET {
+  api_group = "edutrack-ai"
+
+  input {
+    int subjects_id? filters=min:1
+  }
+
+  stack {
+    db.get Subjects {
+      field_name = "id"
+      field_value = $input.subjects_id
+    } as $subjects
+  
+    precondition ($subjects != null) {
+      error_type = "notfound"
+      error = "Not Found."
+    }
+  }
+
+  response = $subjects
+}
