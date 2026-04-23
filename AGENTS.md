@@ -1,15 +1,3 @@
-Objetivo
-Aprender o fluxo de trabalho do Spec-Driven Development (SDD) utilizando a versão moderna do
-OpenSpec. Você usará comandos de chat para iniciar e gerenciar uma Change (Mudança), onde a IA
-guiará a criação dos artefatos.
-
-Conceitos Chave
-• Change (Mudança): A unidade de trabalho no OpenSpec. Uma mudança contém todos os
-artefatos necessários (Proposta, Design, Tarefas) para implementar uma feature.
-• Artifact-Driven: O fluxo é guiado pela criação sequencial de documentos (artifacts).
-• Skill Commands: Comandos especiais de chat (iniciados por /opsx:) que ativam habilidades
-específicas da IA.
-
 Passos Detalhados
 Legenda de Comandos:
 • Chat: Comando enviado no chat da IA (Copilot/Gemini).
@@ -225,7 +213,3 @@ o Você fez git add . para incluir toda a pasta?
 o Git pode não rastrear pastas vazias - certifique-se de que há pelo menos um arquivo na
 pasta (ex: .gitkeep).
 o Aguarde alguns segundos e recarregue o GitHub.
-
-Dica: O OpenSpec ajuda a manter um "diário de bordo" técnico do seu projeto. No futuro, quando
-você usar IAs como o Gemini ou Claude, elas lerão essas proposals para saber exatamente o que
-você quer construir.
