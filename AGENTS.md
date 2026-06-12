@@ -1,215 +1,237 @@
-Passos Detalhados
-Legenda de Comandos:
-• Chat: Comando enviado no chat da IA (Copilot/Gemini).
-• Terminal: Comando digitado no terminal do VS Code.
-1. Iniciar uma Nova Mudança (Change)
-Em vez de usar comandos de terminal complexos ou configurar prompts manualmente, você usará a
-skill /opsx:new.
-1. Abra o Chat da IA no VS Code. 2. Envie o comando:
-/opsx:new add-subjects
-(Ou descreva o que você quer: "Quero criar o gerenciamento de disciplinas")
-A IA irá:
-1. Criar a pasta openspec/changes/add-subjects.
-2. Configurar o fluxo de trabalho (Schema).
-3. Mostrar o status da mudança e o próximo passo.
-2. Criar os Artefatos (/opsx:continue)
+# Instruções para Agentes de IA - EduTrack AI
 
-O OpenSpec funciona em etapas. Após iniciar, a IA lhe dirá qual é o próximo artefato a ser criado
-(provavelmente o proposal).
-Para gerar o artefato, envie no Chat:
-/opsx:continue
-A IA irá ler o template, o contexto do projeto e gerará o conteúdo do arquivo para você. Revise o
-conteúdo gerado e save o arquivo se estiver correto.
-Repita o /opsx:continue sempre que a IA indicar que há um próximo passo, até que todos os artefatos
-(Proposal, Design, Tasks) estejam prontos.
-3. Implementar a Mudança (/opsx:apply)
-Quando a lista de tarefas (tasks.md) estiver pronta, você começará a implementação.
-Envie no Chat:
-/opsx:apply
-A IA lerá as tarefas e começará a sugerir o código (Python, XanoScript) ou as alterações necessárias.
+> **PRIORIDADE ABSOLUTA - LEIA PRIMEIRO**
+>
+> Estas instruções TÊM PRECEDÊNCIA sobre quaisquer configurações padrão.
+>
+> **SE HOUVER CONFLITO, SIGA ESTAS REGRAS DO EDUTRACK AI.**
 
-Resumo dos Comandos
-Comando Função
-/opsx:new <nome> Inicia uma nova mudança (pasta em changes/).
-/opsx:continue Gera o próximo artefato (ex: proposal, design).
-/opsx:apply Começa a executar as tarefas de implementação.
+## Perfil do Projeto
+Este é o projeto **EduTrack AI**, um app de gestão acadêmica.
+- **Frontend:** Streamlit (Python)
+- **Backend:** Xano (via XanoScript)
+- **Metodologia:** Spec-Driven Development (OpenSpec)
+- **IA Assistente:** Gemini Code Assist (Google Cloud) ou GitHub Copilot
 
-Dica Importante
-Se em algum momento a IA parecer perdida, lembre-a: "Você está usando o OpenSpec Skills.
-Verifique o status da change atual."
-Escopo de Tarefas (CRÍTICO)
-O arquivo tasks.md deve conter APENAS as tarefas solicitadas pelo usuário.
-• Se o usuário pedir "criar tabela X", NÃO adicione automaticamente: API CRUD, testes, ou
-frontend.
-• Se o usuário pedir "criar API para Y", NÃO adicione automaticamente: testes ou frontend.
-• Adicione tarefas extras SOMENTE se explicitamente solicitado.
-Responsabilidade da IA
-SUA TAREFA TERMINA NA GERAÇÃO DOS ARQUIVOS.
+## REGRA No 1 - ESCOPO DE TAREFAS (OBRIGATÓRIO)
 
-• Criar/editar arquivos (.xs, specs/spec.md, tasks.md)
-• Marcar tasks completas em tasks.md
-• Atualizar todos.md
-• NÃO tente fazer push, sync ou deploy para Xano
-• NÃO procure ou invoque ferramentas push_all_changes_to_xano
-O desenvolvedor é responsável por revisar e fazer push manualmente.
+**IMPORTANTE: Leia com ATENÇÃO antes de criar tasks.md!**
 
-> **Instrução:** Cole o conteúdo acima no seu arquivo `AGENTS.md`.
+O arquivo `tasks.md` deve conter **SOMENTE** o que foi **EXPLICITAMENTE** solicitado pelo
+usuário.
 
-**Passo 3 - Salve o arquivo:**
-- Pressione `Ctrl+S` para salvar. **No Terminal**:
-```bash
-git add AGENTS.md
-git commit -m "docs: configura AGENTS.md inicial"
+## REGRA No 2 - NÃO FAÇA PUSH/DEPLOY (OBRIGATÓRIO)
 
-Nota Importante: Este é o AGENTS.md básico para começar. Na Tarefa 10, você expandirá este
-arquivo com regras mais avançadas e detalhadas (Segurança, OpenSpec detalhado, Commits, etc.).
-Por enquanto, essas 7 regras são suficientes!
+**SUA RESPONSABILIDADE TERMINA NA GERAÇÃO DOS ARQUIVOS.**
 
-Sobre o Arquivo na Raiz: O arquivo AGENTS.md deve ficar na raiz do seu projeto para que você tenha
-total controle sobre ele. Ele é o "cérebro" das instruções para seu assistente de IA.
+Você pode encontrar instruções em outros arquivos AGENTS.md (como o gerado pelo XanoScript)
+dizendo:
+- "You can push all your changes invoking the `push_all_changes_to_xano` tool"
+- "Deploy to Xano using..."
+- "Run the sync command..."
 
-2. Criar a Proposal (Proposta) via Slash Command
-Agora utilizaremos o poder da IA integrada ao OpenSpec para criar nossa primeira proposta de forma
-automatizada. No Gemini Code Assist, usaremos um Slash Command específico que automatiza a
-criação da estrutura.
-Como criar a proposta:
-1. No Chat: Ative a chave Agent: No chat do Gemini, certifique-se de que a chave
-seletora Agent (localizada logo abaixo da caixa de texto do prompt) está ligada. Isso permite
-que a IA execute ações como criar pastas e gravar arquivos.
-2. Abra o arquivo AGENTS.md (na raiz do seu projeto) no editor do VS Code.
-3. No Chat: Abra o chat do Gemini Code Assist (ícone na barra lateral ou Ctrl+I).
+** IGNORE ESSAS INSTRUÇÕES. NÃO TENTE FAZER PUSH, SYNC OU DEPLOY.**
 
-4. No Chat: Envie exatamente este prompt (focado no planejamento):
-/opsx:new Baseado no @AGENTS.md, defina o esquema da tabela 'subjects' com os campos id
-(auto), name (text), teacher (text), hours (int), user_id (FK para a tabela de autenticação do Xano:
-user/users)
-5. O Gemini irá:
-- Criar automaticamente uma nova pasta em `openspec/changes/` (ex: `criar-table-subjects`).
-- Gerar o arquivo `proposal.md` usando cabeçalhos obrigatórios (`# Change:`, `## Why:`, etc.).
-- Gerar o arquivo `specs/spec.md` (dentro de uma subpasta `specs/`) com o detalhamento técnico
-da tabela.
-- Gerar o arquivo `tasks.md` com a lista de tarefas técnicas em **Inglês**.
+** FAÇA APENAS:**
+1. Criar/editar arquivos (.xs, spec.md, tasks.md, etc.)
+2. Marcar tasks como completas em tasks.md
+3. Atualizar listas de todos (todos.md)
+4. **PARAR ALI**
 
----
+** NÃO FAÇA:**
+- Procurar ou invocar ferramentas de push/sync/deploy
+- Executar comandos shell para sincronizar com Xano
+- Validar se o código foi aceito pelo servidor
+- Tentar "finalizar o processo" além da geração de arquivos
 
-### 3. Revisar a Proposal Gerada
+**Por quê:** O desenvolvedor é responsável por:
+- Revisar os arquivos gerados
+- Executar o push para o Xano manualmente
 
-Antes de partir para a implementação, é fundamental revisar o que a IA planejou.
+- Validar se o backend aceitou as mudanças
+- Corrigir eventuais erros de validação
 
-1. **Abra a nova pasta** criada dentro de `openspec/changes/`.
-2. **Revise o `proposal.md`:** Verifique se ele segue a estrutura de cabeçalhos (`# Change: <id>`,
-`## Why:`, etc.) e se a descrição está clara.
-3. **Revise o `specs/spec.md`:** Verifique se ele usa os termos `### Requirement:` e `####
-Scenario:`, e se os campos da tabela `subjects` estão corretos.
-4. **Revise o `tasks.md`:** Veja se as tarefas estão em inglês e descrevem os passos técnicos (ex:
-criar arquivo `.xs`).
+** ERRADO - Exemplo real de erro:**
 
----
+Pedido do usuário: "planeje a funcionalidade feature-notas-atividades para permitir que o professor
+lance notas"
 
-### 4. Implementar a Mudança (Apply)
+AI gerou (INCORRETO):
 
-Agora, com o plano aprovado, utilizaremos o Slash Command de aplicação do OpenSpec.
+- [ ] Criar tabela activity_grades
+- [ ] Criar API POST /activity_grades
+- [ ] Criar API GET /academic_tasks/{id}/grades ← NÃO FOI PEDIDO!
+- [ ] Criar API GET /users/{id}/grades ← NÃO FOI PEDIDO!
 
-1. **No Chat:** Use o comando `/opsx:apply` seguido do nome da pasta da sua proposta:
-```text
+** CORRETO:**
 
-/opsx:apply create-subjects-table
-(Dica: Se você não sabe o nome exato, verifique o nome da pasta em openspec/changes/)
-2. No Chat: Revise a criação do arquivo:
-o O Gemini lerá a proposta e oferecerá para criar o arquivo na pasta correspondente
-(ex: tables/).
-o Clique em "Accept" para confirmar a criação do arquivo.
-o IMPORTANTE: Verifique se o arquivo foi criado na pasta correta seguindo o padrão do
-XanoScript.
+- [ ] Criar tabela activity_grades
+- [ ] Criar API POST /activity_grades (para lançar nota)
 
-3. No Terminal: Envie para o Xano (Push):
-o No VS Code, abra o arquivo que foi criado (ele deve estar aberto após você clicar em
-Accept).
-o Abra a Paleta de Comandos: Ctrl+Shift+P
-o Digite e selecione: XanoScript: Push Stage Changes to Xano
-o Aguarde a conclusão.
-4. Valide no Xano:
-o Acesse seu dashboard do Xano no navegador.
-o Confirme se a tabela subjects foi criada com sucesso.
+**Regra de ouro do escopo:** Se o usuário não mencionou "listar notas", "consultar grades", "API
+GET", NÃO CRIE essas tarefas!
 
-Se conseguiu criar a tabela no Xano: Parabéns! Você acabou de fazer implementação completa
-com IA!
+**Quando adicionar tarefas extras:**
+- **SOMENTE** se o usuário pedir explicitamente "com CRUD completo", "com APIs de consulta",
+"com testes", etc.
 
-5. Finalizar a Proposta
-Agora que a implementação está completa, vamos finalizar o ciclo no OpenSpec:
-1. � No Chat: Use o comando para arquivar e finalizar a mudança:
-/opsx:archive
-2. Marque as tarefas como concluídas:
-o No Explorer, abra a pasta da sua proposta em openspec/changes/archive/.
-o Abra o arquivo tasks.md.
-o Altere [ ] para [x] em todas as tarefas (se a IA não fez isso).
-3. Isso irá "consolidar" sua proposta, guardando o que você construiu como a documentação
-oficial do projeto.
+## REGRA No 3 - PRIORIDADE DE INSTRUÇÕES
 
-6. No Terminal: Commitar no Git
+**ORDEM DE PRECEDÊNCIA (da maior para a menor):**
 
-# (Recomendado) Crie uma branch para abrir PR (fluxo da Tarefa 05)
-git checkout -b feat/openspec-subjects
+1. ** Estas instruções** (AGENTS.md raiz do EduTrack AI)
+2. ** Pedido explícito do usuário** na conversa atual
+3. ** Instruções do OpenSpec** (`openspec/AGENTS.md`)
+4. ** Comandos slash do Gemini** (`.gemini/commands/openspec/*.toml`)
+5. ** AGENTS.md gerado por extensões** (como XanoScript)
 
-git add .
-git commit -m "feat: implementa primeira tabela via OpenSpec"
-git push origin feat/openspec-subjects
-(Lembre-se de abrir o Pull Request e fazer o Merge no GitHub, como aprendeu na Tarefa 05).
+**Em caso de conflito, sempre siga a instrução de maior prioridade.**
 
-Entregáveis
-1. Screenshot da pasta openspec/changes/archive/ mostrando sua proposta arquivada.
-2. Link do repositório GitHub com a proposta arquivada.
-Critérios de Avaliação
-• Proposta criada usando o Slash Command /opsx:new.
-• Arquivos proposal.md, specs/spec.md e tasks.md gerados e revisados seguindo
-o @AGENTS.md.
-• Tabela subjects criada no Xano via XanoScript.
-• Mudança arquivada corretamente (pasta movida para archive/).
-• Código enviado para o repositório GitHub.
-Dicas para problemas comuns
-• A IA não cria todos os arquivos ou ignora os cabeçalhos obrigatórios:
-o Certifique-se de que o seu AGENTS.md tem a regra de "Arquivos Obrigatórios".
-o Reforce com /opsx:continue.
-• Não consigo editar o arquivo AGENTS.md ou não entendo o que adicionar:
-o O AGENTS.md deve ficar na raiz do projeto.
-• Ao enviar o comando /opsx:new, a IA não cria os arquivos:
-o Certifique-se de que a extensão OpenSpec Skills está instalada.
-o Verifique se você está usando a IA correta (Copilot/Gemini).
-• Erro de validação:
-o Verifique se os arquivos proposal.md, specs/spec.md e tasks.md existem e têm
-conteúdo válido.
-o O proposal.md deve ter os cabeçalhos obrigatórios.
+**Exemplo:**
+- XanoScript AGENTS.md diz: "Push usando push_all_changes_to_xano"
+- EduTrack AGENTS.md diz: "NÃO faça push"
+- **Você deve:** NÃO fazer push (prioridade 1 > prioridade 5)
 
-• Erro ao arquivar (archive):
-o Tente pedir novamente: "Archive this change".
-o Se falhar, faça manualmente movendo a pasta para openspec/changes/archive/.
-• O comando de arquivar não fez nada:
-o Se falhar, você pode fazer manualmente:
-▪ Mova a pasta da proposta (ex: add-subjects-table/) para dentro de archive/.
+## REGRA No 4 - SEMPRE CONSULTE OS GUIDELINES DO XANOSCRIPT (OBRIGATÓRIO)
 
-• A IA criou o arquivo fora das pastas padrão:
-o Se isso acontecer, não aceite a sugestão ou apague o arquivo criado.
-o Reforce o comando no chat: "Siga as orientações do XanoScript e crie o arquivo na
-pasta correta para este tipo de recurso."
+**ANTES de criar ou editar qualquer arquivo .xs, você DEVE:**
 
-• A tabela subjects não foi criada no Xano após fazer Push:
-o Certifique-se de que o arquivo .xs foi criado e está aberto no VS Code.
-o Verifique se fez XanoScript: Push Stage Changes to Xano (não apenas Save).
-o Recarregue o painel do Xano no navegador (F5).
-o Se a tabela não aparecer mesmo após Push, pode haver erro de sintaxe - procure por
-marcas de erro no VS Code.
+1. **Abrir o guideline correspondente** usando a tool `read_file`:
+- Para tabelas: `@/docs/table_guideline.md`
+- Para funções: `@/docs/function_guideline.md`
+- Para APIs: `@/docs/api_query_guideline.md`
+- Para tasks: `@/docs/task_guideline.md`
 
-• Não consigo sincronizar com o Xano após criar o arquivo .xs:
-o Certifique-se de que está autenticado no XanoScript (XanoScript: Login to Xano).
-o Verifique se selecionou o workspace correto (XanoScript: Select workspace).
-o Tente fazer XanoScript: Pull latest changes primeiro, depois o Push.
-• Conflito de Git ao tentar committar a proposta arquivada:
-o Você pode ter alterado a proposta enquanto alguém (ou você em outro computador)
-também alterou.
-o Faça git pull origin main antes de fazer commit.
-o Resolva qualquer conflito manualmente.
-• A proposta não aparece em openspec/changes/archive/ no GitHub após push:
-o Você fez git add . para incluir toda a pasta?
-o Git pode não rastrear pastas vazias - certifique-se de que há pelo menos um arquivo na
-pasta (ex: .gitkeep).
-o Aguarde alguns segundos e recarregue o GitHub.
+2. **Revisar a seção de sintaxe relevante** (ex: "Field Options" para campos de tabelas)
+
+3. **Consultar os exemplos** em `*_examples.md` quando houver dúvida
+
+** NÃO FAÇA:**
+- Criar arquivos .xs baseado apenas em conhecimento geral
+- Assumir sintaxe sem verificar a documentação
+
+- Ignorar as referências aos guidelines mencionadas nas instruções
+
+** FAÇA:**
+- `read_file` do guideline específico
+- Verificar sintaxe de campos opcionais, defaults, filtros, etc.
+- Seguir os exemplos fornecidos
+
+**Exemplo do erro que isso previne:**
+
+// ERRADO (sem consultar docs)
+text status {
+description = "Status"
+}
+
+// CORRETO (após ler table_guideline.md)
+text status?="pending" {
+description = "Status"
+}
+
+## Customizações do EduTrack AI
+
+### Nomenclatura e Padrões
+1. **Língua:** Código e variáveis sempre em **INGLÊS**.
+2. **Banco de Dados:** Use `snake_case` (ex: `academic_tasks`, `user_id`).
+3. **Branches Git:** Use prefixos `feat/`, `fix/`, `docs/` (ex: `feat/tabela-tarefas`).
+4. **Commits:** Siga Conventional Commits:
+- `feat:` Nova funcionalidade
+- `fix:` Correção de bug
+- `docs:` Documentação
+- `chore:` Manutenção
+
+### CHECKLIST de Validação OpenSpec (CRÍTICO)
+
+> **OBRIGATÓRIO: ANTES de criar qualquer proposal ou spec.md:**
+>
+> **VOCÊ DEVE usar `read_file` para ler `openspec/AGENTS.md` COMPLETO.**
+>
+> Este arquivo contém:
+> - Estrutura obrigatória do `proposal.md` (## Why, ## What Changes, ## Impact)
+> - Formatos de delta (## ADDED Requirements, ## MODIFIED Requirements, ## REMOVED
+Requirements)
+> - Regras de formatação de scenarios (#### Scenario:)
+> - Comandos de validação
+>
+> **Sem ler este arquivo, você FALHARÁ na validação.**
+
+** Erros mais comuns que causam falha na validação:**
+
+1. **Localização do arquivo determina o formato**
+- Usar `## Requirements` em `openspec/changes/<id>/specs/capability/spec.md`
+- Usar `## ADDED Requirements` em changes/ (são DELTAS, não specs finais)
+- Usar `## Requirements` apenas em `openspec/specs/capability/spec.md` (specs
+permanentes)
+
+2. **Hierarquia markdown incompleta**
+- Começar direto com `### Requirement:`
+- Sempre começar com `# <nome> Specification` → `## Purpose` → `## Requirements` (ou `##
+ADDED Requirements` se em changes/)
+
+3. **Palavras-chave incorretas**
+- "must", "should", "may" (minúsculas)
+
+- SHALL ou MUST (maiúsculas)
+
+4. **Scenarios faltando ou mal formatados**
+- Requirement sem scenario
+- Scenario em texto corrido
+- Todo requirement TEM ≥1 scenario com bullets **WHEN**/**THEN**
+
+**Estrutura para arquivos em openspec/changes/<id>/specs/capability/spec.md:**
+
+# capability-name Specification
+
+## Purpose
+[O que é e por quê]
+
+## ADDED Requirements ← IMPORTANTE: Use ADDED (não apenas Requirements)
+
+### Requirement: Fazer X
+Sistema SHALL fazer X.
+
+#### Scenario: Caso de uso
+- **WHEN** condição
+- **THEN** resultado
+
+### Conhecimento do Schema
+1. **Tabela Existente:** `users` já existe no Xano.
+2. **Relacionamentos:** Sempre use `user_id` para vincular ao usuário logado.
+
+### Segurança e Boas Práticas
+1. **Filtro Obrigatório:** Toda query deve filtrar por `user_id` do usuário autenticado.
+2. **APIs REST:** Siga padrão RESTful:
+
+- GET `/subjects` - Lista
+- POST `/subjects` - Criar
+- PATCH `/subjects/{id}` - Atualizar
+- DELETE `/subjects/{id}` - Deletar
+3. **Python:** Use tratamento de erros (try/except) em lógica complexa.
+
+### Comunicação
+1. Explique o que vai fazer ANTES de fazer.
+2. Indique onde os arquivos serão criados/modificados.
+3. Pergunte se há dúvidas sobre as regras específicas deste projeto.
+
+## Exemplo de spec.md Válido
+
+# subjects Specification
+
+## Purpose
+Define the database structure for managing academic subjects in EduTrack AI.
+
+## Requirements
+
+### Requirement: Create subjects table
+The system SHALL store subject information for each user.
+
+#### Scenario: User creates a new subject
+- **WHEN** user creates a new subject
+- **THEN** system stores it with user_id association
+
+## Estrutura INCORRETA (Falha na Validação)
+
+### Requirement: Create subjects table
+[conteúdo...]
+**Por quê falha:** Começa no nível 3 (###) sem o título principal (#), ## Purpose e ## Requirements.
